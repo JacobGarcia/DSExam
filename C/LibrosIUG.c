@@ -22,10 +22,7 @@ struct nodoLibro
        
        struct nodoLibro *next;
 };
-struct buscarA
-{
-  char buscar[15];
-};
+
 
 struct nodoLibro *primero, *actual, *ultimo, *anterior;
 struct nodoLibro buscar;
