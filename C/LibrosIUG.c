@@ -18,6 +18,7 @@ struct nodoLibro
        char autor[15];
        char editorial[10];     
        int  cantidad;
+       float  precio;
        
        struct nodoLibro *next;
 };
@@ -54,8 +55,10 @@ void pedirDatos(struct nodoLibro *nodo)
 
   printf("Cantidad: ");
   scanf("%d",&nodo->cantidad);
+
+  printf("Precio: ");
+  scanf("%f",&nodo->precio);
   nice();
-  // printf("Datos %s     %s     %s    %d\n",nodo->titulo, nodo->autor, nodo->editorial, nodo->cantidad );
 }
 
 void capturarNodo()
@@ -70,7 +73,7 @@ void capturarNodo()
      // 3. Hacer el enlace del nodo creado
      ultimo = primero;
      ultimo->next = NULL;
-     printf("Primer Nodo Creado\nDatos %s     %s     %s    %d\n",primero->titulo, primero->autor, primero->editorial, primero->cantidad );
+     printf("Primer Nodo Creado\nDatos %s     %s     %s    %d    %.2f\n",primero->titulo, primero->autor, primero->editorial, primero->cantidad, primero->precio);
      nice();
   }
   else
@@ -86,7 +89,7 @@ void capturarNodo()
     ultimo = actual;
     ultimo->next = NULL;
 
-    printf("Nodo Creado\nDatos %s     %s     %s    %d\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad );
+    printf("Nodo Creado\nDatos %s     %s     %s    %d   %.2f\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad, actual->precio);
     nice();
   }
 }
@@ -106,7 +109,7 @@ void consultarNodo()
 
     while(actual != NULL)
     {
-      printf("Datos %s     %s     %s    %d\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad );
+      printf("Datos %s     %s     %s    %d  %.2f\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad, actual->precio);
 
       actual = actual->next;
     }
@@ -144,7 +147,7 @@ int consultar(char parametro[15])
         result = strncmp(actual->titulo,buscar, 15);
         if (result == 0)
         {
-          printf("Encontrado: %s     %s     %s    %d\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad );
+          printf("Encontrado: %s     %s     %s    %d   %.2f\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad, actual->precio);
           encontrado = 1;
         }
         else
@@ -161,7 +164,7 @@ int consultar(char parametro[15])
         result = strncmp(actual->editorial,buscar, 15);
         if (result == 0)
         {
-          printf("Encontrado: %s     %s     %s    %d\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad );
+          printf("Encontrado: %s     %s     %s    %d  %.2f\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad, actual->precio);
           encontrado = 1;
         }
         
@@ -207,12 +210,12 @@ void modificar()
         result = strncmp(actual->titulo,buscar, 15);
         if (result == 0)
         {
-          printf("Vas a modificar: %s     %s     %s    %d\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad );
+          printf("Vas a modificar: %s     %s     %s    %d  %.2f\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad, actual->precio);
           encontrado = 1;
           //Pedimos datos 
           pedirDatos(actual);
 
-          printf("Modificado a: %s     %s     %s    %d\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad );
+          printf("Modificado a: %s     %s     %s    %d   %.2f\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad, actual->precio);
         }
         else
         {
@@ -247,7 +250,7 @@ void eliminarNodo()
       result = strncmp(actual->titulo,buscar, 15);
       if (result == 0)
       {
-        printf("Eliminado: %s     %s     %s    %d\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad );
+        printf("Eliminado: %s     %s     %s    %d   %.2f\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad, actual->precio);
         if(actual == primero)
         {
 
