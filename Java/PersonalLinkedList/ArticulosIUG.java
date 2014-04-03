@@ -24,7 +24,7 @@ public class ArticulosIUG extends Frame implements ActionListener
 					   bConsultarVentas, bConsultarArchivo, bConsultarArchivoVentas, bSalir,
 					   bModificar;
 	private JTextArea  taDatos;
-	private JPanel 	   p1, p2;
+	public JPanel 	   p1, p2;
 	
 	private String clave, datos, nombre, existencia, precio, marca, resultado, controlador;
 	
@@ -128,12 +128,17 @@ public class ArticulosIUG extends Frame implements ActionListener
 		p2.add(new JScrollPane(taDatos));
 		
 		add(p2);
-		setSize(500,600);
-		setVisible(true);
+		// setSize(500,600);
+		// setVisible(true);
 		
 		//Deshabilitar botones pertenecientes a "Modificar Datos"
 		bRealizarTransaccion.setEnabled(false);
 		bCancelar.setEnabled(false);
+	}
+
+	public JPanel getP2()
+	{
+		return this.p2;
 	}
 	
 	public void clrFields()
