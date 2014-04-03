@@ -1,6 +1,17 @@
+/*
+ *LibrosIUG.c
+ *
+ * Created on 01/04/2014
+ *    Project #2 in C
+ *    Authors: Luis Arturo Mendoza & Mario Jacob García
+ *    All Rights Reserved 2014.
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 struct nodoLibro
 {
        char titulo[15];
@@ -15,7 +26,7 @@ struct buscarA
   char buscar[15];
 };
 
-struct nodoLibro *primero, *actual, *ultimo;
+struct nodoLibro *primero, *actual, *ultimo, *anterior;
 struct nodoLibro buscar;
 
 void nice()
@@ -208,7 +219,62 @@ void modificar()
           actual = actual->next;
         }       
       }//END WHILE
+  }
 }
+
+void eliminarNodo()
+{
+  int encontrado = 0;
+  int result=1;
+  char buscar[15];
+
+  if (primero == NULL)
+  {
+    printf("La lista esta vacia...\n");
+  }
+  else
+  {
+    //Pedimos el valor
+    fflush(stdin);
+    printf("Inserta Titulo\n");
+    gets(buscar);
+    fflush(stdin);
+    //Ejecutamos la busqueda
+    actual = primero;
+    while(actual != NULL && encontrado == 0)
+    {
+      fflush(stdin);
+      result = strncmp(actual->titulo,buscar, 15);
+      if (result == 0)
+      {
+        printf("Eliminado: %s     %s     %s    %d\n",actual->titulo, actual->autor, actual->editorial, actual->cantidad );
+        if(actual == primero)
+        {
+
+          primero = actual->next;
+        }
+        else
+        {
+          if (actual == ultimo)
+          {
+            ultimo = anterior;
+            ultimo->next = NULL;
+          }
+          else
+          {
+            anterior->next = actual->next;
+          }
+        }
+
+        encontrado = 1;
+      }
+      else
+      {
+        anterior = actual;
+        actual = actual->next;
+      }       
+    }//END WHILE
+  }
 }
 
 void opciones()
@@ -217,7 +283,7 @@ void opciones()
      int opcion =5;
      do
      {
-     printf("LISTAS ENLAZADAS EN C\n1) Crear nodo Libro\n2) Consultar Libros\n3) Consultar por titulo\n4) Consultar por Editorial\n5) Modificar datos\n6) Salir\nOpcion = ");
+     printf("LISTAS ENLAZADAS EN C\n1) Crear nodo Libro\n2) Consultar Libros\n3) Consultar por titulo\n4) Consultar por Editorial\n5) Modificar datos\n6) Eliminar Libro\n7) Salir\nOpcion = ");
      scanf("%d",&opcion);
 
      if (opcion == 1)
@@ -234,11 +300,11 @@ void opciones()
     if(opcion == 4)
       consultar("editorial");
     if(opcion == 5)
-    {
       modificar();
-    }
-                 
-     }while(opcion !=6);
+    if(opcion == 6)
+      eliminarNodo();
+          
+     }while(opcion !=7);
      nice();
 }
 
